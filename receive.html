@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>통화 받기 (선생님용)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #f4f1ea; color: #2b2b2b;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    background: #fff; border: 1px solid #e3ddd0; border-radius: 18px;
+    padding: 28px 24px; width: 100%; max-width: 440px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+  }
+  h1 { font-size: 20px; margin-bottom: 4px; }
+  .sub { font-size: 13px; color: #8a8170; margin-bottom: 20px; line-height: 1.5; }
+  .status {
+    text-align: center; padding: 16px; border-radius: 12px;
+    background: #f7f4ec; font-size: 15px; font-weight: 600; margin-bottom: 18px;
+    min-height: 56px; display: flex; align-items: center; justify-content: center;
+  }
+  .status.waiting { background: #fdf6dd; color: #8a6d00; }
+  .status.ringing { background: #ffe8d6; color: #c0500f; animation: pulse 1s infinite; }
+  .status.connected { background: #d7f0dd; color: #1d7a3a; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
+  label { display:block; font-size:12px; font-weight:600; color:#8a8170; margin:14px 0 6px; }
+  .roomid {
+    font-family: monospace; font-size: 15px; background:#f0ece1;
+    padding:10px 12px; border-radius:9px; word-break:break-all;
+  }
+  #qrbox { text-align:center; margin:16px 0; }
+  #qrbox img, #qrbox canvas { display:inline-block; }
+  .linkbox {
+    font-size:12px; color:#5a5346; background:#f0ece1; padding:9px 11px;
+    border-radius:8px; word-break:break-all; margin-top:8px;
+  }
+  button {
+    width:100%; padding:14px; border:none; border-radius:11px;
+    font-size:15px; font-weight:600; cursor:pointer; margin-top:10px;
+    transition:opacity .15s;
+  }
+  button:hover{opacity:.88}
+  .accept{ background:#1d7a3a; color:#fff; }
+  .reject{ background:#c0392b; color:#fff; }
+  .hangup{ background:#2b2b2b; color:#fff; }
+  .start{ background:#c9a227; color:#fff; }
+  .hidden{ display:none !important; }
+  .tip{ font-size:11px; color:#8a8170; margin-top:14px; line-height:1.6; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>📞 통화 받기 (선생님용)</h1>
+    <p class="sub">이 페이지를 켜 두면 통화를 받을 수 있어요. 닫으면 받을 수 없어요.</p>
+
+    <div class="status waiting" id="status">시작 버튼을 눌러 통화 대기를 시작하세요</div>
+
+    <button class="start" id="startBtn">통화 대기 시작</button>
+
+    <div id="ready" class="hidden">
+      <label>내 통화방 주소 (이 QR/링크를 배포하세요)</label>
+      <div id="qrbox"></div>
+      <div class="linkbox" id="linkbox"></div>
+      <button class="hangup" id="copyBtn" style="background:#c9a227">링크 복사</button>
+    </div>
+
+    <div id="incoming" class="hidden">
+      <button class="accept" id="acceptBtn">✅ 통화 수락</button>
+      <button class="reject" id="rejectBtn">❌ 거절</button>
+    </div>
+
+    <button class="hangup hidden" id="hangupBtn">통화 종료</button>
+
+    <p class="tip">처음 시작할 때 마이크 권한을 허용해야 통화가 됩니다. 페이지를 새로고침하면 통화방 주소가 바뀌니, QR을 만든 뒤에는 새로고침하지 마세요.</p>
+  </div>
+
+<script>
+  var peer, currentCall, localStream;
+  var startBtn = document.getElementById('startBtn');
+  var statusEl = document.getElementById('status');
+  var readyEl = document.getElementById('ready');
+  var incomingEl = document.getElementById('incoming');
+  var hangupBtn = document.getElementById('hangupBtn');
+
+  function setStatus(text, cls){
+    statusEl.textContent = text;
+    statusEl.className = 'status ' + (cls||'');
+  }
+
+  // 고정 방 ID 생성 (한번 만들면 유지되도록 시간기반 + 랜덤)
+  function makeRoomId(){
+    var saved = null;
+    try { saved = sessionStorage.getItem('teacher_room_id'); } catch(e){}
+    if (saved) return saved;
+    var id = 'teacher-' + Math.random().toString(36).slice(2,8);
+    try { sessionStorage.setItem('teacher_room_id', id); } catch(e){}
+    return id;
+  }
+
+  startBtn.addEventListener('click', function(){
+    setStatus('마이크 권한 확인 중...', 'waiting');
+    navigator.mediaDevices.getUserMedia({ audio:true, video:false })
+      .then(function(stream){
+        localStream = stream;
+        initPeer();
+      })
+      .catch(function(err){
+        setStatus('마이크 권한이 필요합니다. 허용 후 다시 시도하세요.', 'waiting');
+      });
+  });
+
+  function initPeer(){
+    var roomId = makeRoomId();
+    peer = new Peer(roomId, {
+      config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] }
+    });
+
+    peer.on('open', function(id){
+      startBtn.classList.add('hidden');
+      readyEl.classList.remove('hidden');
+      setStatus('대기 중 — 통화가 오면 알려드려요', 'waiting');
+
+      // 통화 페이지 주소 만들기 (같은 폴더의 call.html?room=...)
+      var base = location.href.replace(/[^/]*$/, '');
+      var callUrl = base + 'call.html?room=' + encodeURIComponent(id);
+      document.getElementById('linkbox').textContent = callUrl;
+
+      var qrbox = document.getElementById('qrbox');
+      qrbox.innerHTML = '';
+      new QRCode(qrbox, { text: callUrl, width:200, height:200,
+        colorDark:'#2b2b2b', colorLight:'#ffffff', correctLevel: QRCode.CorrectLevel.H });
+
+      document.getElementById('copyBtn').onclick = function(){
+        navigator.clipboard.writeText(callUrl).then(function(){
+          document.getElementById('copyBtn').textContent = '복사됨!';
+          setTimeout(function(){ document.getElementById('copyBtn').textContent='링크 복사'; },1500);
+        });
+      };
+    });
+
+    peer.on('call', function(call){
+      currentCall = call;
+      setStatus('📞 통화 요청이 왔어요!', 'ringing');
+      incomingEl.classList.remove('hidden');
+
+      document.getElementById('acceptBtn').onclick = function(){
+        call.answer(localStream);
+        incomingEl.classList.add('hidden');
+        hangupBtn.classList.remove('hidden');
+        setStatus('🟢 통화 연결됨', 'connected');
+        call.on('stream', function(remoteStream){
+          playRemote(remoteStream);
+        });
+        call.on('close', endCall);
+      };
+      document.getElementById('rejectBtn').onclick = function(){
+        call.close();
+        incomingEl.classList.add('hidden');
+        setStatus('대기 중 — 통화가 오면 알려드려요', 'waiting');
+      };
+    });
+
+    peer.on('error', function(err){
+      setStatus('오류: ' + err.type + ' (새로고침 후 다시 시도)', 'waiting');
+    });
+  }
+
+  function playRemote(stream){
+    var audio = document.getElementById('remoteAudio');
+    if(!audio){
+      audio = document.createElement('audio');
+      audio.id = 'remoteAudio';
+      audio.autoplay = true;
+      document.body.appendChild(audio);
+    }
+    audio.srcObject = stream;
+  }
+
+  hangupBtn.addEventListener('click', function(){
+    if(currentCall) currentCall.close();
+    endCall();
+  });
+
+  function endCall(){
+    hangupBtn.classList.add('hidden');
+    setStatus('대기 중 — 통화가 오면 알려드려요', 'waiting');
+  }
+</script>
+</body>
+</html>

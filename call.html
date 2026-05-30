@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>통화하기</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: #f4f1ea; color: #2b2b2b;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    background: #fff; border: 1px solid #e3ddd0; border-radius: 18px;
+    padding: 36px 28px; width: 100%; max-width: 400px; text-align: center;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.06);
+  }
+  h1 { font-size: 22px; margin-bottom: 8px; }
+  .sub { font-size: 14px; color: #8a8170; margin-bottom: 28px; line-height: 1.5; }
+  .status {
+    padding: 16px; border-radius: 12px; background: #f7f4ec;
+    font-size: 15px; font-weight: 600; margin-bottom: 22px; min-height: 56px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .status.connecting { background:#fdf6dd; color:#8a6d00; }
+  .status.connected { background:#d7f0dd; color:#1d7a3a; }
+  .status.failed { background:#fde0dd; color:#c0392b; }
+  button {
+    width:100%; padding:16px; border:none; border-radius:12px;
+    font-size:16px; font-weight:700; cursor:pointer; transition:opacity .15s;
+  }
+  button:hover{opacity:.88}
+  .call{ background:#1d7a3a; color:#fff; }
+  .hangup{ background:#c0392b; color:#fff; }
+  .hidden{ display:none !important; }
+  .tip{ font-size:12px; color:#8a8170; margin-top:18px; line-height:1.6; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>📞 통화하기</h1>
+    <p class="sub">아래 버튼을 누르면 통화가 연결됩니다.<br>전화번호 없이 인터넷으로 연결돼요.</p>
+
+    <div class="status" id="status">통화 버튼을 눌러주세요</div>
+
+    <button class="call" id="callBtn">통화 걸기</button>
+    <button class="hangup hidden" id="hangupBtn">통화 종료</button>
+
+    <p class="tip">통화 버튼을 누르면 마이크 권한을 허용해 주세요. 상대방이 수락해야 연결됩니다.</p>
+  </div>
+
+<script>
+  var peer, currentCall, localStream;
+  var callBtn = document.getElementById('callBtn');
+  var hangupBtn = document.getElementById('hangupBtn');
+  var statusEl = document.getElementById('status');
+
+  function setStatus(text, cls){
+    statusEl.textContent = text;
+    statusEl.className = 'status ' + (cls||'');
+  }
+
+  // URL에서 상대방(선생님) 방 ID 읽기
+  function getRoom(){
+    var m = location.search.match(/[?&]room=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  var room = getRoom();
+  if(!room){
+    setStatus('잘못된 주소입니다. QR을 다시 확인해 주세요.', 'failed');
+    callBtn.disabled = true;
+  }
+
+  callBtn.addEventListener('click', function(){
+    setStatus('마이크 권한 확인 중...', 'connecting');
+    navigator.mediaDevices.getUserMedia({ audio:true, video:false })
+      .then(function(stream){
+        localStream = stream;
+        connect();
+      })
+      .catch(function(){
+        setStatus('마이크 권한이 필요합니다.', 'failed');
+      });
+  });
+
+  function connect(){
+    peer = new Peer({
+      config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] }
+    });
+
+    peer.on('open', function(){
+      setStatus('상대방을 호출 중...', 'connecting');
+      currentCall = peer.call(room, localStream);
+
+      if(!currentCall){
+        setStatus('연결 실패. 상대방이 대기 중인지 확인하세요.', 'failed');
+        return;
+      }
+
+      callBtn.classList.add('hidden');
+      hangupBtn.classList.remove('hidden');
+
+      currentCall.on('stream', function(remoteStream){
+        setStatus('🟢 통화 연결됨', 'connected');
+        playRemote(remoteStream);
+      });
+      currentCall.on('close', function(){
+        setStatus('통화가 종료되었습니다.', '');
+        resetUI();
+      });
+
+      // 일정 시간 응답 없으면 안내
+      setTimeout(function(){
+        if(statusEl.className.indexOf('connected') === -1 &&
+           statusEl.className.indexOf('failed') === -1){
+          setStatus('상대방이 받지 않거나 대기 중이 아닙니다.', 'failed');
+        }
+      }, 30000);
+    });
+
+    peer.on('error', function(err){
+      if(err.type === 'peer-unavailable'){
+        setStatus('상대방이 통화 대기 중이 아닙니다.', 'failed');
+      } else {
+        setStatus('연결 오류: ' + err.type, 'failed');
+      }
+      resetUI();
+    });
+  }
+
+  function playRemote(stream){
+    var audio = document.getElementById('remoteAudio');
+    if(!audio){
+      audio = document.createElement('audio');
+      audio.id = 'remoteAudio';
+      audio.autoplay = true;
+      document.body.appendChild(audio);
+    }
+    audio.srcObject = stream;
+  }
+
+  hangupBtn.addEventListener('click', function(){
+    if(currentCall) currentCall.close();
+    resetUI();
+  });
+
+  function resetUI(){
+    hangupBtn.classList.add('hidden');
+    callBtn.classList.remove('hidden');
+  }
+</script>
+</body>
+</html>
