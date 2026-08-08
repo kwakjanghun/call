@@ -317,6 +317,33 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
 </style>
 <style>
 /* ===== deck-specific styles ===== */
+/* 라인 포커스(한 줄 = 한 페이지) 해설 */
+.lf-wrap{display:flex;gap:30px;align-items:flex-start;margin-top:8px}
+.lf-main{flex:1;min-width:0}
+.lf-line{background:#16161e;border:1px solid var(--border);border-radius:18px;padding:30px 34px;
+  font-family:var(--font-mono);font-size:36px;font-weight:600;text-align:center;margin-top:22px;white-space:nowrap;overflow-x:auto}
+.lf-line .kw{color:#bb9af7}.lf-line .fn{color:#7aa2f7}.lf-line .str{color:#9ece6a}.lf-line .cm{color:#565f89}
+.lf-arg{display:inline-block;padding:1px 14px;border-radius:12px;font-weight:800}
+.lf-a1{background:rgba(122,162,247,.18);color:#7aa2f7;box-shadow:inset 0 0 0 2.5px rgba(122,162,247,.55)}
+.lf-a2{background:rgba(187,154,247,.18);color:#bb9af7;box-shadow:inset 0 0 0 2.5px rgba(187,154,247,.55)}
+.lf-a3{background:rgba(158,206,106,.18);color:#9ece6a;box-shadow:inset 0 0 0 2.5px rgba(158,206,106,.5)}
+.lf-a4{background:rgba(224,175,104,.2);color:#e0af68;box-shadow:inset 0 0 0 2.5px rgba(224,175,104,.55)}
+.lf-role{font-size:25px;font-weight:750;color:var(--text-1);text-align:center;margin:24px auto 0;max-width:56ch;line-height:1.45}
+.lf-role .hl{color:var(--accent)}
+.lf-cards{display:flex;gap:16px;margin-top:26px}
+.lf-card{flex:1;background:rgba(255,255,255,.03);border:1px solid var(--border);border-top:3px solid var(--text-3);border-radius:14px;padding:18px 20px}
+.lf-card .h{font-family:var(--font-mono);font-size:23px;font-weight:800;margin-bottom:9px;color:var(--text-1)}
+.lf-card p{font-size:18.5px;line-height:1.5;color:var(--text-2);margin:0}
+.lf-card p b{color:var(--text-1)}
+.lf-card.c1{border-top-color:#7aa2f7}.lf-card.c1 .h{color:#7aa2f7}
+.lf-card.c2{border-top-color:#bb9af7}.lf-card.c2 .h{color:#bb9af7}
+.lf-card.c3{border-top-color:#9ece6a}.lf-card.c3 .h{color:#9ece6a}
+.lf-card.c4{border-top-color:#e0af68}.lf-card.c4 .h{color:#e0af68}
+.lf-map{width:295px;flex-shrink:0;background:#14141b;border:1px solid var(--border);border-radius:14px;
+  padding:16px 18px;font-family:var(--font-mono);font-size:12.5px;line-height:2.05;color:var(--text-3);white-space:pre;overflow-x:hidden}
+.lf-map .cur{color:#e6e8f0;background:rgba(122,162,247,.17);display:inline-block;width:100%;border-radius:5px;padding:0 6px;margin:0 -6px;box-shadow:inset 2.5px 0 0 #7aa2f7}
+.lf-map .mapttl{font-size:11px;letter-spacing:.1em;color:var(--text-3);border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;display:block;white-space:normal}
+
 /* 코드 한 줄씩 해설 */
 .lxrow{display:flex;gap:16px;align-items:stretch;margin-bottom:9px}
 .lxcode{width:50%;background:#16161e;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;
@@ -623,32 +650,126 @@ TM1650 <span class="fn">display</span>(<span class="nu">22</span>, <span class="
   </div>
 </section>
 
-<!-- ═══════════ 8-1. 코드 한 줄씩 (digit) ═══════════ -->
-<section class="slide" data-title="코드 한 줄씩 — digit_display.ino">
-  <div class="kicker">실습 1 · 코드 해설</div>
-  <h2 class="title" style="font-size:38px">코드 한 줄씩 뜯어보기 <span class="pill pill-accent mono" style="font-size:13px;vertical-align:middle">digit_display.ino</span></h2>
-  <div class="mt-m anim-stagger-list">
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">1</span><span><span style="color:#bb9af7">#include</span> <span style="color:#9ece6a">"TM1650.h"</span></span></div>
-      <div class="lxdesc">TM1650 칩을 다루는 함수 묶음(<b>라이브러리</b>)을 가져옵니다. 이 줄이 없으면 <span class="mono">displayFloatNum</span> 같은 함수를 쓸 수 없어요.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">2</span><span>TM1650 <span style="color:#7aa2f7">display</span>(<span class="pnum p1">22</span>, <span class="pnum p2">21</span>);</span></div>
-      <div class="lxdesc"><b>display</b>라는 이름의 표시기 객체를 만듭니다. <span class="pnum p1">22</span> = CLK(박자) 핀, <span class="pnum p2">21</span> = DIO(데이터) 핀 — I2C의 SCL·SDA 역할입니다.</div></div>
-    <div class="lxrow sec"><div class="lxcode"><span class="lxnum">3</span><span><span style="color:#bb9af7">void</span> <span style="color:#7aa2f7">setup</span>() {</span></div>
-      <div class="lxdesc">전원이 켜질 때 <b>딱 한 번</b> 실행되는 준비 함수의 시작입니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">4</span><span><span style="color:#bb9af7">for</span> (<span style="color:#bb9af7">int</span> i = <span style="color:#ff9e64">0</span>; i &lt; <span style="color:#ff9e64">4</span>; i++)</span></div>
-      <div class="lxdesc">i가 0→1→2→3으로 바뀌며 <b>4번 반복</b>합니다. 자리 번호가 0~3번이라 4번이 필요해요.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">5</span><span>&nbsp;&nbsp;display.<span style="color:#7aa2f7">clearBit</span>(i);</span></div>
-      <div class="lxdesc"><b>i번째 자리를 지웁니다.</b> 위 반복문과 합쳐져 네 자리가 모두 깨끗해집니다. (이전 값 청소)</div></div>
-    <div class="lxrow sec"><div class="lxcode"><span class="lxnum">6</span><span><span style="color:#bb9af7">void</span> <span style="color:#7aa2f7">loop</span>() {</span></div>
-      <div class="lxdesc">준비가 끝나면 <b>끝없이 반복</b> 실행되는 함수의 시작입니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">7</span><span>&nbsp;&nbsp;display.<span style="color:#7aa2f7">displayFloatNum</span>(<span style="color:#ff9e64">9999</span>);</span></div>
-      <div class="lxdesc">9999를 네 자리에 표시합니다. 내부에서 숫자를 자리별로 쪼개 <b>자리 주소(0x68…)에 세그먼트 데이터를 전송</b>해 줍니다. loop 안이라 계속 다시 그려져요.</div></div>
+<!-- ═══ 실습1 라인별 코드 해설 (5장) ═══ -->
+<section class="slide" data-title="도구 상자 가져오기 — #include">
+  <div class="kicker">실습 1 · 코드 해설 1 / 5</div>
+  <h2 class="title" style="font-size:34px">도구 상자 가져오기 — #include</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item"><span class="kw">#include</span> <span class="lf-arg lf-a3"><span class="str">"TM1650.h"</span></span></div>
+      <div class="lf-role anim-item">TM1650 칩을 다루는 <span class="hl">함수 묶음(라이브러리)</span>을 통째로 가져온다</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c2 anim-item"><div class="h">#include</div><p>"이 파일을 가져와라"라는 명령. 컴파일할 때 라이브러리 내용이 내 코드 앞에 <b>통째로 붙는다</b>.</p></div><div class="lf-card c3 anim-item"><div class="h">"TM1650.h"</div><p>TM1650 제어 함수들이 들어 있는 파일. 이 줄이 없으면 <b>displayFloatNum 같은 함수를 아예 쓸 수 없다</b>.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">digit_display.ino</span>
+<span class="cur"><span class="kw">#include</span> <span class="str">"TM1650.h"</span></span>
+TM1650 display(<b>22</b>, <b>21</b>);
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 4; i++)
+    display.<span class="fn">clearBit</span>(i);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  display.<span class="fn">displayFloatNum</span>(9999);
+}</div>
   </div>
-  <div class="notes">
-    <p>이번엔 한 줄씩 뜯어봅시다. 1번 줄 include는 <strong>도구 상자를 가져오는 것</strong>입니다. TM1650을 다루는 함수들이 이 안에 들어 있어요.</p>
-    <p>2번 줄이 중요합니다. display라는 객체를 만드는데 괄호 안 숫자 두 개가 <strong>핀 번호</strong>예요. 첫 번째 22가 박자 선 CLK, 두 번째 21이 데이터 선 DIO. 순서를 바꿔 꽂거나 쓰면 동작하지 않으니 배선과 코드가 일치해야 합니다.</p>
-    <p>setup 안의 for문은 i를 0부터 3까지 돌리면서 clearBit로 <strong>네 자리를 모두 지웁니다</strong>. "왜 4가 아니라 0부터 3이지?" — 컴퓨터는 0부터 세기 때문이죠.</p>
-    <p>마지막 displayFloatNum(9999)는 숫자를 자리별로 쪼개서 아까 배운 자리 주소로 보내는 일까지 몽땅 대신해 줍니다. 궁금한 사람은 라이브러리 파일을 열어 보면 우리가 배운 주소·데이터 코드가 그대로 들어 있어요.</p>
+  <div class="notes"><p>먼저 도구 상자를 가져옵니다. #include는 "이 파일을 내 코드에 통째로 붙여라"라는 뜻이에요.</p><p>TM1650.h 안에 표시기를 다루는 함수가 다 들어 있습니다. 이 한 줄 덕분에 우리는 어려운 통신 코드를 직접 쓰지 않아도 됩니다.</p></div>
+</section>
+<section class="slide" data-title="표시기 리모컨 만들기 — 핀 번호 두 개">
+  <div class="kicker">실습 1 · 코드 해설 2 / 5</div>
+  <h2 class="title" style="font-size:34px">표시기 리모컨 만들기 — 핀 번호 두 개</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">TM1650 <span class="fn">display</span>(<span class="lf-arg lf-a1">22</span>, <span class="lf-arg lf-a2">21</span>);</div>
+      <div class="lf-role anim-item">display라는 이름의 <span class="hl">제어 객체(리모컨)</span>를 만들며 연결 핀을 알려준다</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c3 anim-item"><div class="h">display</div><p>앞으로 표시기에 명령을 내릴 때 쓸 <b>이름</b>. display.○○( ) 형태로 부른다.</p></div><div class="lf-card c1 anim-item"><div class="h">22</div><p><b>CLK(박자) 핀</b>. 데이터를 읽을 타이밍을 맞춰 주는 선 — ESP32의 22번 핀에 연결.</p></div><div class="lf-card c2 anim-item"><div class="h">21</div><p><b>DIO(데이터) 핀</b>. 실제 내용이 오가는 선. I2C의 SDA에 해당 — 21번 핀에 연결.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">digit_display.ino</span>
+<span class="kw">#include</span> <span class="str">"TM1650.h"</span>
+<span class="cur">TM1650 display(<b>22</b>, <b>21</b>);</span>
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 4; i++)
+    display.<span class="fn">clearBit</span>(i);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  display.<span class="fn">displayFloatNum</span>(9999);
+}</div>
   </div>
+  <div class="notes"><p>이 줄이 배선과 코드를 잇는 다리입니다. 괄호 안 숫자 두 개가 핀 번호예요.</p><p>첫 번째 22가 박자 선 CLK, 두 번째 21이 데이터 선 DIO. 실제 배선과 이 숫자가 다르면 아무것도 표시되지 않습니다. 순서도 중요해요.</p></div>
+</section>
+<section class="slide" data-title="네 자리를 돌리는 반복문 — for">
+  <div class="kicker">실습 1 · 코드 해설 3 / 5</div>
+  <h2 class="title" style="font-size:34px">네 자리를 돌리는 반복문 — for</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item"><span class="kw">for</span> (<span class="lf-arg lf-a1"><span class="kw">int</span> i = 0</span>; <span class="lf-arg lf-a2">i &lt; 4</span>; <span class="lf-arg lf-a3">i++</span>)</div>
+      <div class="lf-role anim-item">자리 번호 0~3을 차례로 도는 <span class="hl">4번 반복</span> — setup( ) 안에서 실행된다</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c1 anim-item"><div class="h">int i = 0</div><p><b>시작값</b>. 자리 번호가 0부터 시작하니까 i도 0부터. (컴퓨터는 0부터 센다!)</p></div><div class="lf-card c2 anim-item"><div class="h">i < 4</div><p><b>계속 조건</b>. i가 4가 되는 순간 멈춘다 → 0, 1, 2, 3으로 <b>총 4번</b> 실행.</p></div><div class="lf-card c3 anim-item"><div class="h">i++</div><p>한 바퀴 돌 때마다 <b>i를 1씩 증가</b>. 0→1→2→3으로 자리를 옮겨 간다.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">digit_display.ino</span>
+<span class="kw">#include</span> <span class="str">"TM1650.h"</span>
+TM1650 display(<b>22</b>, <b>21</b>);
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+<span class="cur">  <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 4; i++)</span>
+    display.<span class="fn">clearBit</span>(i);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  display.<span class="fn">displayFloatNum</span>(9999);
+}</div>
+  </div>
+  <div class="notes"><p>setup 안의 for문입니다. 세 칸으로 나눠 읽으면 쉬워요 — 시작, 조건, 증가.</p><p>i가 0부터 시작해서 4보다 작은 동안, 한 바퀴마다 1씩 커집니다. 그래서 0, 1, 2, 3 — 정확히 네 번. 자리도 네 개죠.</p></div>
+</section>
+<section class="slide" data-title="자리 지우기 — clearBit">
+  <div class="kicker">실습 1 · 코드 해설 4 / 5</div>
+  <h2 class="title" style="font-size:34px">자리 지우기 — clearBit</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">display.<span class="fn">clearBit</span>(<span class="lf-arg lf-a1">i</span>);</div>
+      <div class="lf-role anim-item"><span class="hl">i번째 자리를 끈다</span> — 반복문과 합쳐져 네 자리 전부 청소</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c3 anim-item"><div class="h">clearBit( )</div><p>한 자리를 <b>지우는(끄는) 함수</b>. 이전에 표시되던 값을 청소한다.</p></div><div class="lf-card c1 anim-item"><div class="h">i</div><p><b>지울 자리 번호</b>(0~3). for문이 돌 때마다 0, 1, 2, 3이 차례로 들어와 <b>네 자리가 모두</b> 지워진다.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">digit_display.ino</span>
+<span class="kw">#include</span> <span class="str">"TM1650.h"</span>
+TM1650 display(<b>22</b>, <b>21</b>);
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 4; i++)
+<span class="cur">    display.<span class="fn">clearBit</span>(i);</span>
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  display.<span class="fn">displayFloatNum</span>(9999);
+}</div>
+  </div>
+  <div class="notes"><p>반복문 안에서 실행되는 한 줄입니다. clearBit(i)는 i번째 자리를 지우라는 뜻.</p><p>i가 0, 1, 2, 3으로 바뀌며 네 번 실행되니까 결국 네 자리가 전부 깨끗해집니다. 쓰레기 값이 남지 않게 하는 준비 작업이에요.</p></div>
+</section>
+<section class="slide" data-title="숫자 표시 — displayFloatNum">
+  <div class="kicker">실습 1 · 코드 해설 5 / 5</div>
+  <h2 class="title" style="font-size:34px">숫자 표시 — displayFloatNum</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">display.<span class="fn">displayFloatNum</span>(<span class="lf-arg lf-a4">9999</span>);</div>
+      <div class="lf-role anim-item">9999를 네 자리에 표시 — <span class="hl">loop( ) 안이라 끝없이 반복</span>되어 화면이 유지된다</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c3 anim-item"><div class="h">displayFloatNum( )</div><p>숫자를 자리별로 쪼개 <b>자리 주소(0x68~0x6B)로 전송하는 일까지</b> 몽땅 대신해 주는 함수.</p></div><div class="lf-card c4 anim-item"><div class="h">9999</div><p><b>표시할 숫자</b>. 12.34처럼 소수점도 가능 — 값을 바꿔서 직접 실험해 보자.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">digit_display.ino</span>
+<span class="kw">#include</span> <span class="str">"TM1650.h"</span>
+TM1650 display(<b>22</b>, <b>21</b>);
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> i = 0; i &lt; 4; i++)
+    display.<span class="fn">clearBit</span>(i);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+<span class="cur">  display.<span class="fn">displayFloatNum</span>(9999);</span>
+}</div>
+  </div>
+  <div class="notes"><p>마지막 한 줄이 실제로 숫자를 띄우는 부분입니다. displayFloatNum은 9999를 쪼개 자리 주소로 하나씩 보내는 일까지 대신해 줍니다.</p><p>loop 안에 있으니 계속 다시 그려져서 화면이 유지돼요. 괄호 안을 12.34로 바꾸면 소수점까지 표시됩니다.</p></div>
 </section>
 
 <!-- ═══════════ 9. 회로 + 실행 ═══════════ -->
@@ -818,49 +939,246 @@ LedControl <span class="fn">lc</span>(<span class="nu">23</span>, <span class="n
   </div>
 </section>
 
-<!-- ═══════════ 14-1. 코드 한 줄씩 ① (dot 선언부) ═══════════ -->
-<section class="slide" data-title="코드 한 줄씩 ① — 선언부">
-  <div class="kicker">실습 2 · 코드 해설 ①</div>
-  <h2 class="title" style="font-size:38px">코드 한 줄씩 ① — 선언부 <span class="pill pill-accent mono" style="font-size:13px;vertical-align:middle">dot_matrix.ino</span></h2>
-  <div class="mt-m anim-stagger-list">
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">1</span><span><span style="color:#bb9af7">#include</span> <span style="color:#9ece6a">&lt;LedControl.h&gt;</span></span></div>
-      <div class="lxdesc">MAX7219 칩을 다루는 함수 묶음(<b>라이브러리</b>)을 가져옵니다. SPI 통신 처리도 이 안에 들어 있어 함수만 불러 쓰면 됩니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">2</span><span>LedControl <span style="color:#7aa2f7">lc</span>(<span class="pnum p1">23</span>, <span class="pnum p2">18</span>, <span class="pnum p3">15</span>, <span class="pnum p4">1</span>);</span></div>
-      <div class="lxdesc">lc라는 제어 객체를 만듭니다. <span class="pnum p1">23</span> = DIN(데이터), <span class="pnum p2">18</span> = CLK(박자), <span class="pnum p3">15</span> = CS(선택) 핀, 마지막 <span class="pnum p4">1</span> = <b>연결한 매트릭스 모듈 개수</b>입니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">3</span><span><span style="color:#bb9af7">byte</span> IMAGES[<span style="color:#ff9e64">8</span>] = {</span></div>
-      <div class="lxdesc"><b>byte</b>(8비트) 값을 <b>8칸</b> 담는 배열을 선언합니다. 배열 한 칸 = 매트릭스 한 줄이라서 8칸이면 8줄, 그림 하나가 완성됩니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">4</span><span>&nbsp;&nbsp;<span style="color:#ff9e64">B01100110</span>, <span style="color:#ff9e64">B11111111</span>, … };</span></div>
-      <div class="lxdesc">맨 앞 <b>B</b>는 "2진수로 읽어라"는 표기입니다. <span class="mono">B01100110</span>은 첫째 줄 — <b>1인 자리는 켜진 점, 0인 자리는 꺼진 점</b>. 하트의 볼록한 윗부분 두 덩어리죠.</div></div>
+<!-- ═══ 실습2 라인별 코드 해설 (8장) ═══ -->
+<section class="slide" data-title="도구 상자 가져오기 — #include">
+  <div class="kicker">실습 2 · 코드 해설 1 / 8</div>
+  <h2 class="title" style="font-size:34px">도구 상자 가져오기 — #include</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item"><span class="kw">#include</span> <span class="lf-arg lf-a3"><span class="str">&lt;LedControl.h&gt;</span></span></div>
+      <div class="lf-role anim-item">MAX7219를 다루는 <span class="hl">라이브러리</span> — SPI 통신 처리까지 다 들어 있다</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c2 anim-item"><div class="h">#include</div><p>라이브러리를 내 코드에 붙이는 명령. 실습 1의 TM1650.h와 <b>같은 역할</b>.</p></div><div class="lf-card c3 anim-item"><div class="h">&lt;LedControl.h&gt;</div><p>MAX7219 제어 함수 묶음. <b>SPI 통신 코드도 이 안에</b> 있어서 우리는 함수만 부르면 된다.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="cur"><span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span></span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+  lc.<span class="fn">setIntensity</span>(0, 8);
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
   </div>
-  <div class="notes">
-    <p>도트매트릭스 코드도 한 줄씩 봅시다. include는 아까와 같은 역할 — MAX7219용 도구 상자입니다. SPI 통신 코드도 이미 들어 있어서 우리는 함수만 부르면 돼요.</p>
-    <p>2번 줄 괄호 안 숫자 <strong>네 개</strong>가 포인트입니다. 앞의 세 개는 배선 그대로 DIN 23, CLK 18, CS 15. 그런데 마지막 1은 핀이 아니라 <strong>모듈 개수</strong>예요. 매트릭스를 여러 개 이어 붙이면 이 숫자를 늘립니다. 전광판이 긴 이유가 바로 이거죠.</p>
-    <p>3~4번 줄이 그림 데이터입니다. byte 하나가 8비트, 즉 한 줄의 점 8개. B로 시작하면 2진수라는 뜻이고, 1이 켜진 점입니다. B01100110을 소리 내 읽으며 "꺼짐-켜짐-켜짐-꺼짐…" 하트 윗부분이 그려지는지 눈으로 확인해 보세요.</p>
-  </div>
+  <div class="notes"><p>도트매트릭스 코드도 도구 상자부터 가져옵니다. 이번엔 LedControl — MAX7219 전용 라이브러리입니다.</p><p>SPI 통신을 처리하는 코드도 이미 이 안에 들어 있어요. 그래서 우리는 통신을 몰라도 함수만 부르면 됩니다.</p></div>
 </section>
-
-<!-- ═══════════ 14-2. 코드 한 줄씩 ② (dot setup·loop) ═══════════ -->
-<section class="slide" data-title="코드 한 줄씩 ② — setup과 loop">
-  <div class="kicker">실습 2 · 코드 해설 ②</div>
-  <h2 class="title" style="font-size:38px">코드 한 줄씩 ② — setup( )과 loop( )</h2>
-  <div class="mt-m anim-stagger-list">
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">5</span><span>lc.<span style="color:#7aa2f7">shutdown</span>(<span class="pnum p1">0</span>, <span class="pnum p2">false</span>);</span></div>
-      <div class="lxdesc"><span class="pnum p1">0</span> = 첫 번째 모듈, <span class="pnum p2">false</span> = "절전 모드 끔". MAX7219는 켜자마자 잠들어 있어서 <b>먼저 깨워야</b> 화면이 나옵니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">6</span><span>lc.<span style="color:#7aa2f7">setIntensity</span>(<span class="pnum p1">0</span>, <span class="pnum p2">8</span>);</span></div>
-      <div class="lxdesc">0번 모듈의 밝기를 정합니다. 범위는 <b>0(어두움)~15(최대)</b>, <span class="pnum p2">8</span>이면 중간 밝기입니다.</div></div>
-    <div class="lxrow"><div class="lxcode"><span class="lxnum">7</span><span>lc.<span style="color:#7aa2f7">clearDisplay</span>(<span class="pnum p1">0</span>);</span></div>
-      <div class="lxdesc">0번 모듈의 화면을 <b>모두 끕니다</b>. 이전에 그려진 점이 남지 않게 출발 전에 청소하는 거예요.</div></div>
-    <div class="lxrow sec"><div class="lxcode"><span class="lxnum">8</span><span><span style="color:#bb9af7">for</span> (<span style="color:#bb9af7">int</span> row = <span style="color:#ff9e64">0</span>; row &lt; <span style="color:#ff9e64">8</span>; row++)</span></div>
-      <div class="lxdesc">row가 0→7로 바뀌며 <b>8번 반복</b> — 매트릭스의 8줄을 위에서부터 차례로 도는 반복문입니다.</div></div>
-    <div class="lxrow sec"><div class="lxcode"><span class="lxnum">9</span><span>&nbsp;&nbsp;lc.<span style="color:#7aa2f7">setRow</span>(<span class="pnum p1">0</span>, <span class="pnum p2">row</span>, <span class="pnum p3">IMAGES[row]</span>);</span></div>
-      <div class="lxdesc"><span class="pnum p1">0</span>번 모듈의 <span class="pnum p2">row</span>번째 줄에 <span class="pnum p3">IMAGES[row]</span> 바이트를 그립니다. row가 0이면 첫째 줄에 <span class="mono">B01100110</span> — <b>비트가 그대로 점 8개</b>가 됩니다.</div></div>
+<section class="slide" data-title="제어 객체 만들기 — 숫자 네 개의 비밀">
+  <div class="kicker">실습 2 · 코드 해설 2 / 8</div>
+  <h2 class="title" style="font-size:34px">제어 객체 만들기 — 숫자 네 개의 비밀</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">LedControl <span class="fn">lc</span>(<span class="lf-arg lf-a1">23</span>, <span class="lf-arg lf-a2">18</span>, <span class="lf-arg lf-a3">15</span>, <span class="lf-arg lf-a4">1</span>);</div>
+      <div class="lf-role anim-item">핀 세 개 + <span class="hl">모듈 개수</span> — 마지막 숫자는 핀이 아니다!</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c1 anim-item"><div class="h">23</div><p><b>DIN(데이터 입력) 핀</b>. 그림 데이터가 들어가는 선.</p></div><div class="lf-card c2 anim-item"><div class="h">18</div><p><b>CLK(박자) 핀</b>. 데이터를 읽을 타이밍을 맞춘다.</p></div><div class="lf-card c3 anim-item"><div class="h">15</div><p><b>CS(선택) 핀</b>. "지금 너한테 말하는 거야"라고 칩을 지목하는 선.</p></div><div class="lf-card c4 anim-item"><div class="h">1</div><p>연결한 <b>매트릭스 모듈 개수</b>. 이어 붙이면 이 숫자를 늘린다 — 전광판이 긴 이유!</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+<span class="cur">LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);</span>
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+  lc.<span class="fn">setIntensity</span>(0, 8);
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
   </div>
-  <p class="footnote mt-m">8줄을 다 그리면 loop가 처음부터 다시 — 같은 하트를 계속 그려서 화면이 유지됩니다.</p>
-  <div class="notes">
-    <p>setup의 세 줄은 <strong>"깨우고 → 밝기 맞추고 → 지우고"</strong>로 외우면 됩니다. shutdown(0, false)에서 false가 "절전을 끈다", 즉 깨운다는 뜻인 게 헷갈리기 쉬우니 주의하세요. 첫 번째 인자 0은 모듈 번호 — 모듈이 하나뿐이라 전부 0입니다.</p>
-    <p>setIntensity의 8은 밝기입니다. 0부터 15까지 가능한데, 15로 바꾸면? 네, 훨씬 밝아집니다. 실습 때 직접 바꿔 보세요.</p>
-    <p>loop의 두 줄이 핵심입니다. for문이 row를 0부터 7까지 돌리고, setRow가 "0번 모듈의 row번째 줄에 IMAGES[row]를 그려라"를 8번 수행하면 하트 완성. <strong>배열 한 칸 → 화면 한 줄</strong>이라는 대응만 잡히면 이 코드는 다 이해한 겁니다. 그래서 IMAGES 값만 바꾸면 그림이 바뀌는 거예요 — 이게 연습 문제 2번의 답이기도 합니다.</p>
+  <div class="notes"><p>이 줄이 오늘의 함정 문제입니다. 괄호 안 숫자 네 개 중 앞의 세 개만 핀 번호예요 — DIN 23, CLK 18, CS 15.</p><p>마지막 1은 핀이 아니라 모듈 개수입니다. 매트릭스를 옆으로 이어 붙이면 이 숫자만 늘리면 돼요. 시험에 나오기 딱 좋은 부분이죠?</p></div>
+</section>
+<section class="slide" data-title="그림 데이터 — 배열 한 칸이 한 줄">
+  <div class="kicker">실습 2 · 코드 해설 3 / 8</div>
+  <h2 class="title" style="font-size:34px">그림 데이터 — 배열 한 칸이 한 줄</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item"><span class="kw">byte</span> IMAGES[<span class="lf-arg lf-a2">8</span>] = { <span class="lf-arg lf-a1">B01100110</span>, … };</div>
+      <div class="lf-role anim-item"><span class="hl">한 칸 = 화면 한 줄</span> — 8칸을 채우면 그림 하나가 완성된다</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c2 anim-item"><div class="h">byte</div><p><b>8비트</b>짜리 값. 비트 하나가 점 하나 → 한 줄의 <b>점 8개</b>와 딱 맞는다.</p></div><div class="lf-card c2 anim-item"><div class="h">[8]</div><p><b>8칸짜리 배열</b>. 한 칸이 한 줄이니까 8칸 = 8줄 = 그림 전체.</p></div><div class="lf-card c1 anim-item"><div class="h">B01100110</div><p><b>B는 "2진수로 읽어라"</b>는 표기. 1 = 켜진 점, 0 = 꺼진 점. 하트의 첫째 줄이다.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="cur"><span class="kw">byte</span> IMAGES[8] = {</span>
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+  lc.<span class="fn">setIntensity</span>(0, 8);
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
   </div>
+  <div class="notes"><p>그림 데이터입니다. byte 하나가 8비트, 딱 한 줄의 점 8개예요. 8칸 모이면 8줄, 그림 하나가 완성됩니다.</p><p>B01100110을 같이 읽어 봅시다 — 꺼짐, 켜짐, 켜짐, 꺼짐, 꺼짐, 켜짐, 켜짐, 꺼짐. 하트의 윗부분 두 덩어리가 보이나요? 이 배열만 바꾸면 어떤 그림이든 그릴 수 있습니다.</p></div>
+</section>
+<section class="slide" data-title="칩 깨우기 — shutdown">
+  <div class="kicker">실습 2 · 코드 해설 4 / 8</div>
+  <h2 class="title" style="font-size:34px">칩 깨우기 — shutdown</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">lc.<span class="fn">shutdown</span>(<span class="lf-arg lf-a1">0</span>, <span class="lf-arg lf-a2">false</span>);</div>
+      <div class="lf-role anim-item">MAX7219는 켜자마자 잠들어 있다 — <span class="hl">false로 절전을 꺼서 깨운다</span></div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c1 anim-item"><div class="h">0</div><p><b>모듈 번호</b>. 첫 번째 모듈이라는 뜻 — 모듈이 하나뿐이니 오늘은 항상 0.</p></div><div class="lf-card c2 anim-item"><div class="h">false</div><p>"절전 모드를 <b>끔</b>" = 깨우기. <b>true면 다시 잠든다</b>. 거꾸로 같아서 헷갈리기 쉬운 포인트!</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+<span class="cur">  lc.<span class="fn">shutdown</span>(0, false);</span>
+  lc.<span class="fn">setIntensity</span>(0, 8);
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
+  </div>
+  <div class="notes"><p>setup의 첫 줄입니다. MAX7219는 전원이 들어오면 절전 모드로 잠들어 있어요. 그래서 제일 먼저 깨워야 합니다.</p><p>shutdown인데 false를 주면 깨어난다 — 이름과 반대 같아서 헷갈리죠. "절전(shutdown)을 꺼라(false)"로 읽으면 맞습니다.</p></div>
+</section>
+<section class="slide" data-title="밝기 정하기 — setIntensity">
+  <div class="kicker">실습 2 · 코드 해설 5 / 8</div>
+  <h2 class="title" style="font-size:34px">밝기 정하기 — setIntensity</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">lc.<span class="fn">setIntensity</span>(<span class="lf-arg lf-a1">0</span>, <span class="lf-arg lf-a2">8</span>);</div>
+      <div class="lf-role anim-item">밝기는 <span class="hl">0(어두움) ~ 15(최대)</span> — 8이면 중간 밝기</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c1 anim-item"><div class="h">0</div><p><b>모듈 번호</b>. 역시 첫 번째 모듈.</p></div><div class="lf-card c2 anim-item"><div class="h">8</div><p><b>밝기 값</b>. 0~15 중 중간. <b>15로 바꾸면 훨씬 밝아진다</b> — 실습 때 직접 바꿔 보자.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+<span class="cur">  lc.<span class="fn">setIntensity</span>(0, 8);</span>
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
+  </div>
+  <div class="notes"><p>다음은 밝기입니다. 0이 제일 어둡고 15가 최대. 8이면 중간쯤이에요.</p><p>실습 때 15로 바꿔서 업로드해 보세요. 확 밝아집니다. 0으로 하면 꺼지는 게 아니라 아주 어둡게 켜집니다.</p></div>
+</section>
+<section class="slide" data-title="화면 청소 — clearDisplay">
+  <div class="kicker">실습 2 · 코드 해설 6 / 8</div>
+  <h2 class="title" style="font-size:34px">화면 청소 — clearDisplay</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">lc.<span class="fn">clearDisplay</span>(<span class="lf-arg lf-a1">0</span>);</div>
+      <div class="lf-role anim-item">출발 전에 <span class="hl">모든 점을 끈다</span> — 이전 그림이 남지 않게</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c3 anim-item"><div class="h">clearDisplay( )</div><p>64개 점을 <b>전부 끄는</b> 함수. 실습 1의 clearBit와 같은 "청소" 역할.</p></div><div class="lf-card c1 anim-item"><div class="h">0</div><p><b>모듈 번호</b>. setup 세 줄의 첫 인자가 전부 0인 이유 — 모듈이 하나라서.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+  lc.<span class="fn">setIntensity</span>(0, 8);
+<span class="cur">  lc.<span class="fn">clearDisplay</span>(0);</span>
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
+  </div>
+  <div class="notes"><p>setup의 마지막 줄, 화면 청소입니다. 이전에 그려져 있던 점이 남지 않게 64개 점을 전부 끕니다.</p><p>setup 세 줄을 묶어서 외웁시다 — "깨우고, 밝기 맞추고, 지우고".</p></div>
+</section>
+<section class="slide" data-title="8줄을 도는 반복문 — for">
+  <div class="kicker">실습 2 · 코드 해설 7 / 8</div>
+  <h2 class="title" style="font-size:34px">8줄을 도는 반복문 — for</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item"><span class="kw">for</span> (<span class="lf-arg lf-a1"><span class="kw">int</span> row = 0</span>; <span class="lf-arg lf-a2">row &lt; 8</span>; <span class="lf-arg lf-a3">row++</span>)</div>
+      <div class="lf-role anim-item">매트릭스의 <span class="hl">8줄을 위에서부터 차례로</span> 도는 반복문</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c1 anim-item"><div class="h">int row = 0</div><p><b>시작값</b>. 맨 윗줄이 0번 줄.</p></div><div class="lf-card c2 anim-item"><div class="h">row < 8</div><p><b>계속 조건</b>. 0~7로 <b>총 8번</b> — 줄이 8개니까.</p></div><div class="lf-card c3 anim-item"><div class="h">row++</div><p>한 바퀴마다 <b>다음 줄로</b> 내려간다.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+  lc.<span class="fn">setIntensity</span>(0, 8);
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+<span class="cur">  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)</span>
+    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);
+}</div>
+  </div>
+  <div class="notes"><p>loop로 왔습니다. 실습 1에서 본 for문과 구조가 똑같죠? 이번엔 변수 이름이 row, 줄 번호입니다.</p><p>0번 줄부터 7번 줄까지 여덟 줄을 위에서부터 차례로 돕니다. 조건이 왜 row < 8인지 이제 설명할 수 있죠?</p></div>
+</section>
+<section class="slide" data-title="한 줄 그리기 — setRow">
+  <div class="kicker">실습 2 · 코드 해설 8 / 8</div>
+  <h2 class="title" style="font-size:34px">한 줄 그리기 — setRow</h2>
+  <div class="lf-wrap">
+    <div class="lf-main">
+      <div class="lf-line anim-item">lc.<span class="fn">setRow</span>(<span class="lf-arg lf-a1">0</span>, <span class="lf-arg lf-a2">row</span>, <span class="lf-arg lf-a3">IMAGES[row]</span>);</div>
+      <div class="lf-role anim-item"><span class="hl">row번째 줄에 배열 row번째 칸을</span> 그린다 — 8번 반복하면 하트 완성</div>
+      <div class="lf-cards anim-stagger-list"><div class="lf-card c1 anim-item"><div class="h">0</div><p><b>모듈 번호</b>. 오늘도 변함없이 첫 번째 모듈.</p></div><div class="lf-card c2 anim-item"><div class="h">row</div><p><b>그릴 줄 번호</b>(0~7). for문이 돌 때마다 다음 줄로.</p></div><div class="lf-card c3 anim-item"><div class="h">IMAGES[row]</div><p>그 줄에 그릴 <b>점 8개 데이터</b>. row가 0이면 B01100110 → <b>비트가 그대로 점이 된다</b>.</p></div></div>
+    </div>
+    <div class="lf-map anim-item"><span class="mapttl">dot_matrix.ino</span>
+<span class="kw">#include</span> <span class="str">&lt;LedControl.h&gt;</span>
+LedControl lc(<b>23</b>, <b>18</b>, <b>15</b>, <b>1</b>);
+ 
+<span class="kw">byte</span> IMAGES[8] = {
+  B01100110, B11111111, …
+};
+ 
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  lc.<span class="fn">shutdown</span>(0, false);
+  lc.<span class="fn">setIntensity</span>(0, 8);
+  lc.<span class="fn">clearDisplay</span>(0);
+}
+ 
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="kw">int</span> row = 0; row &lt; 8; row++)
+<span class="cur">    lc.<span class="fn">setRow</span>(0, row, IMAGES[row]);</span>
+}</div>
+  </div>
+  <div class="notes"><p>핵심 한 줄입니다. setRow는 "0번 모듈의 row번째 줄에 IMAGES[row]를 그려라"예요.</p><p>row가 0이면 첫째 줄에 B01100110, 1이면 둘째 줄에 B11111111… 여덟 번 돌면 하트 완성. 배열 한 칸이 화면 한 줄 — 이 대응만 잡히면 끝입니다. IMAGES만 바꾸면 그림이 바뀌어요. 연습 문제 2번의 답이기도 합니다.</p><p>8줄을 다 그리면 loop가 처음부터 다시 시작돼 같은 하트를 계속 그립니다. 그래서 화면이 유지되는 거예요.</p></div>
 </section>
 
 <!-- ═══════════ 15. 회로 + 실행 ═══════════ -->
@@ -953,7 +1271,7 @@ LedControl <span class="fn">lc</span>(<span class="nu">23</span>, <span class="n
 </div>
 
 <header class="deck-header"><span>사물인터넷 실습 · 6장 디스플레이</span><span>ESP32 · TM1650 · MAX7219</span></header>
-<footer class="deck-footer"><span>자료 출처 · ICBANQ ESP32 교재 6장 (수업용)</span><span class="slide-number" data-current="1" data-total="21"></span></footer>
+<footer class="deck-footer"><span>자료 출처 · ICBANQ ESP32 교재 6장 (수업용)</span><span class="slide-number" data-current="1" data-total="31"></span></footer>
 
 <script>
 /* html-ppt :: runtime.js
