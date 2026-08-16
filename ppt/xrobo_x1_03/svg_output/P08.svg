@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">CONCEPT · 폴링 (Polling)</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">10번 반복해서 리모컨을 살핀다</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="lead">
+    <text x="72" y="230" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" font-weight="600" fill="#1F2937">입력을 기다리는 게 아니라, 일정한 간격으로 계속 확인하는 방식 — 폴링</text>
+  </g>
+  <g id="timeline">
+    <line x1="120" y1="380" x2="1160" y2="380" stroke="#1E3A8A" stroke-width="3"/>
+    <rect x="120" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="223" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="326" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="429" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="532" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="635" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="738" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="841" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="944" y="356" width="8" height="48" fill="#1E3A8A"/>
+    <rect x="1047" y="356" width="8" height="48" fill="#F97316"/>
+    <text x="124" y="336" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#1E3A8A">호출 1</text>
+    <text x="1046" y="336" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#F97316">호출 10</text>
+    <text x="152" y="440" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#6B7280">← 호출과 호출 사이 0.2초 기다리기 → 전체 감지 구간은 약 2초</text>
+  </g>
+  <g id="mechanics">
+    <text x="72" y="520" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">매 호출마다 함수가 리모컨 수신값(A6)을 한 번 확인한다. 값이 1이 아니면 아무 일 없이 돌아오고,</text>
+    <text x="72" y="556" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">1이면 그 순간 리모컨 제어 모드로 넘어간다. 이 2초가 자동 시연 중 유일한 탈출 기회다.</text>
+  </g>
+  <g id="term-chip">
+    <rect x="72" y="588" width="520" height="46" fill="#F3F4F6"/>
+    <rect x="72" y="588" width="4" height="46" fill="#0E7490"/>
+    <text x="100" y="618" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">용어 · 폴링 = 주기적으로 상태를 조사하는 입력 처리 방식</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 08</text>
+  </g>
+</svg>

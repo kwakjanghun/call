@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">FLOWCHART · 전체 실행 흐름</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">한 장으로 보는 프로그램의 일생</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="flow-start">
+    <rect x="90" y="200" width="200" height="60" fill="#1E3A8A"/>
+    <text x="190" y="238" text-anchor="middle" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">시작 · 초기 설정</text>
+    <line x1="190" y1="260" x2="190" y2="308" stroke="#1F2937" stroke-width="2"/>
+    <path d="M 190 308 L 183 294 L 197 294 Z" fill="#1F2937"/>
+  </g>
+  <g id="flow-mainloop">
+    <rect x="90" y="308" width="480" height="272" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="3"/>
+    <text x="122" y="352" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#1E3A8A">메인 루프 (무한 반복)</text>
+    <text x="122" y="396" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">1. 폴링 10회 — 매회 A6 = 1 인지 검사</text>
+    <text x="122" y="430" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">2. 전진 1초 → 0.5초 대기</text>
+    <text x="122" y="464" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">3. 후진 1초 → 0.5초 대기</text>
+    <text x="122" y="498" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">4. 멜로디 7음 → 다시 1로</text>
+    <text x="122" y="548" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#6B7280">리모컨 입력이 없는 한 영원히 반복</text>
+  </g>
+  <g id="flow-decision">
+    <path d="M 640 400 L 730 350 L 820 400 L 730 450 Z" fill="#FFFFFF" stroke="#F97316" stroke-width="3"/>
+    <text x="730" y="394" text-anchor="middle" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="700" fill="#1F2937">폴링 중</text>
+    <text x="730" y="420" text-anchor="middle" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="700" fill="#F97316">A6 = 1 ?</text>
+    <line x1="570" y1="400" x2="640" y2="400" stroke="#1F2937" stroke-width="2"/>
+    <line x1="820" y1="400" x2="890" y2="400" stroke="#1F2937" stroke-width="2"/>
+    <path d="M 890 400 L 876 393 L 876 407 Z" fill="#1F2937"/>
+    <text x="836" y="384" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" font-weight="600" fill="#0E7490">예</text>
+    <line x1="730" y1="450" x2="730" y2="500" stroke="#1F2937" stroke-width="2"/>
+    <line x1="730" y1="500" x2="578" y2="500" stroke="#1F2937" stroke-width="2"/>
+    <path d="M 578 500 L 592 493 L 592 507 Z" fill="#1F2937"/>
+    <text x="742" y="486" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" font-weight="600" fill="#6B7280">아니오 — 시연 계속</text>
+  </g>
+  <g id="flow-rcmode">
+    <rect x="890" y="308" width="300" height="272" fill="#FFFFFF" stroke="#0E7490" stroke-width="3"/>
+    <text x="922" y="352" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#0E7490">리모컨 제어 모드</text>
+    <text x="922" y="396" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">시작음 도·레·미 연주 후</text>
+    <text x="922" y="430" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">무한 반복하며 버튼 분기:</text>
+    <text x="922" y="468" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">1 전진 · 2 후진 · 5 멜로디</text>
+    <text x="922" y="502" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">그 외 정지</text>
+    <text x="922" y="548" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#F97316">메인 루프로 복귀하지 않음</text>
+  </g>
+  <g id="flow-note">
+    <text x="90" y="628" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="600" fill="#1F2937">자동 시연은 예고편, 리모컨 모드가 본편 — 그리고 본편에서는 되돌아오는 길이 없다.</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 13</text>
+  </g>
+</svg>

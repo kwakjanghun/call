@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">CODE READING 1 · 시작과 초기 설정</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">두 줄로 끝나는 준비 단계</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="code-panel">
+    <rect x="72" y="190" width="520" height="200" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+    <rect x="72" y="190" width="4" height="200" fill="#1E3A8A"/>
+    <text x="108" y="240" font-family="Consolas, 'Courier New', monospace" font-size="20" font-weight="700" fill="#1E3A8A">시작 버튼을 클릭했을 때</text>
+    <text x="108" y="272" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#6B7280">  (RF 자동 연결 = 켬)</text>
+    <text x="108" y="320" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">0번 핀 값을 20으로 정하기</text>
+    <text x="108" y="352" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#6B7280">  (초기 상태 설정)</text>
+  </g>
+  <g id="explain-start">
+    <rect x="640" y="190" width="568" height="200" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="640" y="190" width="568" height="6" fill="#1E3A8A"/>
+    <text x="672" y="240" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">시작 블록 — 프로그램의 진입점</text>
+    <text x="672" y="284" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">JSON에는 rfauto = 1 로 기록되어 있다.</text>
+    <text x="672" y="316" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">전원이 켜지면 RF 수신기가 리모컨과</text>
+    <text x="672" y="348" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">자동으로 짝을 맺도록 준비하는 옵션이다.</text>
+  </g>
+  <g id="explain-init">
+    <rect x="72" y="420" width="1136" height="180" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="72" y="420" width="1136" height="6" fill="#F97316"/>
+    <text x="104" y="470" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">설정 블록 — pin = 0, val = 20</text>
+    <text x="104" y="514" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">확장 팔레트의 설정 블록으로, 0번 포트 장치에 초기값 20을 준다. 본격적인 동작 전에</text>
+    <text x="104" y="546" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">장치를 기준 상태로 맞춰 두는 초기화 관례다. 정확한 블록 이름은 mBlock의 XROBO 팔레트에서 확인하자.</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 06</text>
+  </g>
+</svg>

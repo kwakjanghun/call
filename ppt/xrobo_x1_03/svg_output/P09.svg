@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">CODE READING 3 · 모터 제어</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">속도의 부호가 곧 방향이다</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="panel-forward">
+    <rect x="72" y="190" width="552" height="220" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="72" y="190" width="552" height="6" fill="#1E3A8A"/>
+    <use data-icon="chunk-filled/play" x="104" y="226" width="32" height="32" fill="#1E3A8A"/>
+    <text x="152" y="250" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">전진</text>
+    <text x="104" y="304" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">모터 좌 10 우 10 (1000ms)</text>
+    <text x="104" y="344" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">양쪽 모두 +10 → 같은 방향, 같은 힘 → 직진</text>
+    <text x="104" y="376" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#6B7280">1000ms = 정확히 1초 동안만 굴러간다</text>
+  </g>
+  <g id="panel-backward">
+    <rect x="656" y="190" width="552" height="220" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="656" y="190" width="552" height="6" fill="#F97316"/>
+    <use data-icon="chunk-filled/skip-backward" x="688" y="226" width="32" height="32" fill="#F97316"/>
+    <text x="736" y="250" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">후진</text>
+    <text x="688" y="304" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">모터 좌 -10 우 -10 (1000ms)</text>
+    <text x="688" y="344" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">숫자는 그대로, 부호만 마이너스 → 반대 방향</text>
+    <text x="688" y="376" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#6B7280">같은 1초라서 제자리 근처로 돌아온다</text>
+  </g>
+  <g id="rules">
+    <rect x="72" y="440" width="1136" height="160" fill="#F3F4F6"/>
+    <rect x="72" y="440" width="4" height="160" fill="#1E3A8A"/>
+    <text x="104" y="488" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">모터 블록의 세 가지 규칙</text>
+    <text x="104" y="530" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">1. 좌·우 값이 같으면 직진, 다르면 회전한다 (예: 좌 10 우 -10 = 제자리 우회전)</text>
+    <text x="104" y="562" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">2. 시간이 있는 블록은 그 시간만 돌고 멈추고, 없는 블록은 다음 명령까지 계속 돈다</text>
+    <text x="104" y="594" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">3. 동작 사이의 0.5초 기다리기는 관성을 줄여 움직임을 또렷하게 만든다</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 09</text>
+  </g>
+</svg>

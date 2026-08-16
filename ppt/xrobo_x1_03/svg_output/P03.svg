@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">FILE STRUCTURE · 파일 구조</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">.mblock 파일 안에는 무엇이 있나</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="file-tree">
+    <rect x="72" y="190" width="560" height="330" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+    <rect x="72" y="190" width="4" height="330" fill="#1E3A8A"/>
+    <text x="108" y="238" font-family="Consolas, 'Courier New', monospace" font-size="20" font-weight="700" fill="#1E3A8A">XROBO_Extreme_X1_03.mblock</text>
+    <text x="108" y="270" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#6B7280">(정체는 ZIP 압축 파일)</text>
+    <text x="108" y="318" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">├─ project.json</text>
+    <text x="108" y="350" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#F97316">│   블록 코드가 JSON으로 저장된 진짜 소스</text>
+    <text x="108" y="390" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">├─ mscratch.json</text>
+    <text x="108" y="422" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#6B7280">│   장치·확장·에디터 모드 정보</text>
+    <text x="108" y="462" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">├─ *.svg  (무대·스프라이트 그림)</text>
+    <text x="108" y="498" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">└─ *.wav  (효과음 자산)</text>
+  </g>
+  <g id="explain">
+    <text x="688" y="238" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">읽는 방법 세 가지 사실</text>
+    <text x="688" y="290" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">1. 확장자만 .mblock일 뿐 압축을 풀면</text>
+    <text x="688" y="322" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">    누구나 내부 파일을 볼 수 있다</text>
+    <text x="688" y="374" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">2. 블록 하나하나가 project.json 안에</text>
+    <text x="688" y="406" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">    opcode와 파라미터로 기록된다</text>
+    <text x="688" y="458" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">3. 로봇 블록은 별도 확장에서 나온다</text>
+  </g>
+  <g id="chips">
+    <rect x="688" y="490" width="250" height="46" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="712" y="520" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">확장: xrobo_learnkit v0.2.2</text>
+    <rect x="958" y="490" width="250" height="46" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="982" y="520" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">모드: 업로드(Arduino C)</text>
+  </g>
+  <g id="note">
+    <rect x="72" y="556" width="1136" height="72" fill="#F3F4F6"/>
+    <rect x="72" y="556" width="4" height="72" fill="#F97316"/>
+    <text x="104" y="600" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">업로드 모드에서는 블록이 Arduino C 코드로 변환되어 보드에 저장되므로, PC 없이도 로봇 단독으로 실행된다</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 03</text>
+  </g>
+</svg>

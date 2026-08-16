@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="ending">
+  <rect x="0" y="0" width="1280" height="720" fill="#1E3A8A"/>
+  <g id="ending-title">
+    <rect x="72" y="88" width="48" height="6" fill="#F97316"/>
+    <text x="72" y="170" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="48" font-weight="700" fill="#FFFFFF">값을 바꾸면 동작이 바뀐다</text>
+    <text x="72" y="220" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" fill="#FFFFFF" fill-opacity="0.85">소스를 읽었다면, 이제 소스를 고칠 차례 — 변형 미션 3가지</text>
+  </g>
+  <g id="mission1">
+    <rect x="72" y="270" width="1136" height="94" fill="#FFFFFF" fill-opacity="0.1"/>
+    <text x="104" y="310" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="22" font-weight="700" fill="#F97316">미션 1 · 속도와 시간 바꾸기</text>
+    <text x="104" y="344" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#FFFFFF" fill-opacity="0.9">전진 속도 10을 30으로, 1000ms를 2000ms로 — 로봇의 움직임이 어떻게 달라지는지 예측하고 확인하자</text>
+  </g>
+  <g id="mission2">
+    <rect x="72" y="380" width="1136" height="94" fill="#FFFFFF" fill-opacity="0.1"/>
+    <text x="104" y="420" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="22" font-weight="700" fill="#F97316">미션 2 · 새 버튼 분기 추가하기</text>
+    <text x="104" y="454" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#FFFFFF" fill-opacity="0.9">중첩 if-else에 A6 = 3 가지를 추가해 제자리 회전(좌 20 · 우 -20)을 만들어 보자</text>
+  </g>
+  <g id="mission3">
+    <rect x="72" y="490" width="1136" height="94" fill="#FFFFFF" fill-opacity="0.1"/>
+    <text x="104" y="530" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="22" font-weight="700" fill="#F97316">미션 3 · 나만의 멜로디 작곡하기</text>
+    <text x="104" y="564" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#FFFFFF" fill-opacity="0.9">주파수 표를 참고해 7음 멜로디를 다른 곡으로 교체하자 — 재생·쉼 시간으로 리듬까지 표현하면 성공</text>
+  </g>
+  <g id="ending-footer">
+    <text x="72" y="662" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF" fill-opacity="0.75">공동교육과정 로봇 소프트웨어 개발 · XROBO Extreme X1 · 3차시 엑스쿠터 컨트롤</text>
+  </g>
+</svg>

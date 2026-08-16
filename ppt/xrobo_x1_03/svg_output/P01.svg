@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="cover">
+  <rect x="0" y="0" width="1280" height="720" fill="#1E3A8A"/>
+  <g id="cover-topline">
+    <rect x="72" y="64" width="48" height="6" fill="#F97316"/>
+    <text x="72" y="106" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF" fill-opacity="0.85">공동교육과정 · 로봇 소프트웨어 개발</text>
+  </g>
+  <g id="cover-title">
+    <text x="72" y="300" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="64" font-weight="700" fill="#FFFFFF">엑스쿠터 컨트롤</text>
+    <text x="72" y="384" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="64" font-weight="700" fill="#F97316">소스 코드 완전 분석</text>
+    <text x="72" y="444" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" font-weight="500" fill="#FFFFFF" fill-opacity="0.9">mBlock 프로젝트를 블록 하나까지 뜯어 읽는 시간</text>
+  </g>
+  <g id="cover-meta">
+    <rect x="72" y="516" width="270" height="52" fill="#FFFFFF" fill-opacity="0.12"/>
+    <text x="96" y="549" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF">교구 · XROBO Extreme X1</text>
+    <rect x="362" y="516" width="216" height="52" fill="#FFFFFF" fill-opacity="0.12"/>
+    <text x="386" y="549" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF">도구 · mBlock 5</text>
+    <rect x="598" y="516" width="160" height="52" fill="#FFFFFF" fill-opacity="0.12"/>
+    <text x="622" y="549" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF">3차시</text>
+  </g>
+  <g id="cover-robot">
+    <rect x="960" y="220" width="220" height="220" fill="#FFFFFF" fill-opacity="0.08"/>
+    <use data-icon="chunk-filled/robot" x="1010" y="270" width="120" height="120" fill="#F97316"/>
+  </g>
+  <g id="cover-footer">
+    <text x="72" y="668" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#FFFFFF" fill-opacity="0.6">XROBO_Extreme_X1_03______v250521.mblock</text>
+  </g>
+</svg>

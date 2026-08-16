@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">HARDWARE · 하드웨어와 블록</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">이 소스가 제어하는 세 가지 장치</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="table-head">
+    <rect x="72" y="184" width="1136" height="52" fill="#1E3A8A"/>
+    <text x="104" y="218" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">장치</text>
+    <text x="360" y="218" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">소스에 등장하는 블록</text>
+    <text x="820" y="218" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">파라미터의 의미</text>
+  </g>
+  <g id="row-motor">
+    <rect x="72" y="236" width="1136" height="136" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+    <use data-icon="chunk-filled/bolt" x="104" y="272" width="36" height="36" fill="#F97316"/>
+    <text x="156" y="288" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#1F2937">DC 모터 2개</text>
+    <text x="156" y="318" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#6B7280">(왼쪽 · 오른쪽 바퀴)</text>
+    <text x="360" y="284" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#1F2937">모터 좌 O 우 O (O ms 동안)</text>
+    <text x="360" y="316" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#1F2937">모터 좌 O 우 O (계속)</text>
+    <text x="820" y="284" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">좌·우 속도와 지속 시간(ms)</text>
+    <text x="820" y="316" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">속도의 부호(+/-)가 회전 방향</text>
+  </g>
+  <g id="row-buzzer">
+    <rect x="72" y="372" width="1136" height="136" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+    <use data-icon="chunk-filled/music" x="104" y="408" width="36" height="36" fill="#0E7490"/>
+    <text x="156" y="424" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#1F2937">부저</text>
+    <text x="156" y="454" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#6B7280">(소리 출력)</text>
+    <text x="360" y="420" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#1F2937">소리 O Hz, O ms 재생</text>
+    <text x="360" y="452" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#1F2937">후 O ms 쉬기</text>
+    <text x="820" y="420" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">주파수(Hz)가 음의 높이,</text>
+    <text x="820" y="452" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">재생·쉼 시간이 리듬을 만든다</text>
+  </g>
+  <g id="row-rf">
+    <rect x="72" y="508" width="1136" height="136" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+    <use data-icon="chunk-filled/signal" x="104" y="544" width="36" height="36" fill="#1E3A8A"/>
+    <text x="156" y="560" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700" fill="#1F2937">RF 리모컨 수신</text>
+    <text x="156" y="590" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#6B7280">(입력 장치)</text>
+    <text x="360" y="556" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#1F2937">리모컨 수신값(A6) = O ?</text>
+    <text x="360" y="588" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#1F2937">(조건 블록에서 비교)</text>
+    <text x="820" y="556" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">A6 채널로 들어온 버튼 값을</text>
+    <text x="820" y="588" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">1 · 2 · 5 등 숫자와 비교한다</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 05</text>
+  </g>
+</svg>

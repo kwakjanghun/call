@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" data-pptx-page-role="content">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <text x="72" y="78" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="600" fill="#0E7490">CODE READING 5 · 함수 1부</text>
+    <text x="72" y="128" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="42" font-weight="700" fill="#1F2937">「엑스쿠터 컨트롤」 — 진입 조건과 시작음</text>
+    <line x1="72" y1="156" x2="1208" y2="156" stroke="#E5E7EB" stroke-width="2"/>
+  </g>
+  <g id="code-panel">
+    <rect x="72" y="190" width="560" height="360" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+    <rect x="72" y="190" width="4" height="360" fill="#0E7490"/>
+    <text x="108" y="238" font-family="Consolas, 'Courier New', monospace" font-size="20" font-weight="700" fill="#0E7490">함수 정의: 엑스쿠터 컨트롤</text>
+    <text x="108" y="286" font-family="Consolas, 'Courier New', monospace" font-size="20" font-weight="700" fill="#1E3A8A">  만약 리모컨값(A6) = 1 이면</text>
+    <text x="108" y="326" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#F97316">    소리 262 (100ms + 150ms)</text>
+    <text x="108" y="358" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#F97316">    소리 294 (100ms + 150ms)</text>
+    <text x="108" y="390" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#F97316">    소리 321 (100ms + 150ms)</text>
+    <text x="108" y="438" font-family="Consolas, 'Courier New', monospace" font-size="20" font-weight="700" fill="#1E3A8A">    무한 반복하기</text>
+    <text x="108" y="470" font-family="Consolas, 'Courier New', monospace" font-size="20" fill="#1F2937">      (리모컨 값 분기 — 다음 장)</text>
+    <text x="108" y="518" font-family="Consolas, 'Courier New', monospace" font-size="18" fill="#6B7280">  조건이 거짓이면 즉시 메인으로 복귀</text>
+  </g>
+  <g id="explain-entry">
+    <rect x="680" y="190" width="528" height="164" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="680" y="190" width="528" height="6" fill="#0E7490"/>
+    <text x="712" y="240" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">문지기 역할의 if 블록</text>
+    <text x="712" y="284" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">리모컨 1번이 눌린 순간에만 본문이 열린다.</text>
+    <text x="712" y="316" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">그 외에는 함수가 빈손으로 되돌아간다.</text>
+  </g>
+  <g id="explain-sound">
+    <rect x="680" y="378" width="528" height="172" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2"/>
+    <rect x="680" y="378" width="528" height="6" fill="#F97316"/>
+    <text x="712" y="428" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="24" font-weight="700" fill="#1F2937">시작음 = 사용자 피드백</text>
+    <text x="712" y="472" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">262·294·321Hz ≈ 도4·레4·미4 세 음으로</text>
+    <text x="712" y="504" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" fill="#1F2937">"모드가 바뀌었다"를 소리로 알려 준다.</text>
+  </g>
+  <g id="note">
+    <rect x="72" y="576" width="1136" height="52" fill="#F3F4F6"/>
+    <rect x="72" y="576" width="4" height="52" fill="#0E7490"/>
+    <text x="104" y="610" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" fill="#1F2937">참고 · 정확한 미4는 330Hz — 소스의 321은 근사값이라 살짝 낮게 들린다. 직접 330으로 고쳐 비교해 보자.</text>
+  </g>
+  <g id="footer">
+    <line x1="72" y1="664" x2="1208" y2="664" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="72" y="694" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">로봇 소프트웨어 개발 · 공동교육과정</text>
+    <text x="1208" y="694" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" fill="#6B7280">XROBO Extreme X1 · 11</text>
+  </g>
+</svg>
